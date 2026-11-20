@@ -30,7 +30,7 @@ _SUFFIXES = {"flac": ".flac", "alac": ".m4a", "wav": ".wav", "aiff-lossless": ".
 _AUDIO = set(_SUFFIXES.values())
 _FORMAT_NAMES = {"flac": "flac", "alac": "alac", "wav": "wav", "aiff-lossless": "aiff", "mp3-320": "mp3",
                  "mp3-v0": "mp3", "aac-hi": "aac", "vorbis": "vorbis"}
-_USER_AGENT = "Melodex-retriever-bandcamp/0.1"
+_USER_AGENT = "Melodex-retriever-bandcamp/2 (+https://github.com/Dextrd/melodex-retriever-bandcamp)"
 
 # Collections by sign-in, so searching for each song of an album doesn't read it again; kept briefly, so something
 # just bought is found.

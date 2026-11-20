@@ -8,8 +8,8 @@ The plugin does what you'd do on your collection page, so it only ever fetches m
 for this, so it reads the same pages and calls your browser does, and a change on Bandcamp's side can break it until
 the plugin is updated.
 
-It runs beside [Melodex](https://github.com/dextrd/Melodex) as a container of its own, which Melodex reaches over the
-[retrieval plugin contract](https://github.com/dextrd/Melodex/blob/main/docs/contracts/README.md).
+It runs beside [Melodex](https://github.com/Dextrd/Melodex) as a container of its own, which Melodex reaches over the
+[retrieval plugin contract](https://github.com/Dextrd/Melodex/blob/main/docs/contracts/README.md).
 
 ## What it does
 
