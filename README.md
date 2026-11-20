@@ -8,7 +8,8 @@ The plugin does what you'd do on your collection page, so it only ever fetches m
 for this, so it reads the same pages and calls your browser does, and a change on Bandcamp's side can break it until
 the plugin is updated.
 
-It lives in the Melodex repository for now and will move to its own repository later.
+It runs beside [Melodex](https://github.com/dextrd/Melodex) as a container of its own, which Melodex reaches over the
+[retrieval plugin contract](https://github.com/dextrd/Melodex/blob/main/docs/contracts/README.md).
 
 ## What it does
 
@@ -32,19 +33,29 @@ It lives in the Melodex repository for now and will move to its own repository l
 | `format` | `flac` | One of Bandcamp's download formats: `flac`, `alac`, `wav` or `aiff-lossless` (lossless), or `mp3-320`, `mp3-v0`, `aac-hi` or `vorbis`. |
 | `minScore` | `0.6` | Albums and songs that match less well than this aren't offered. |
 
-## Running it
+## Adding it to Melodex
+
+Add this under `services:` in the compose file you run Melodex with, beside `core` and `beets-worker`, so it shares
+their `staging` volume:
 
 ```yaml
-retriever-bandcamp:
-  build: plugins/retriever-bandcamp
-  volumes:
-    - staging:/staging
+  retriever-bandcamp:
+    image: ghcr.io/dextrd/melodex-retriever-bandcamp:latest
+    container_name: melodex-retriever-bandcamp
+    user: "${PUID:-1000}:${PGID:-1000}"
+    restart: unless-stopped
+    volumes:
+      - staging:/staging
 ```
+
+Then start it with `docker compose up -d`. `latest` follows each release; to choose when it changes, use a version
+such as `2` or `2.0.0` instead. On SELinux hosts with podman, give it the same `security_opt` as Melodex's own
+containers.
 
 Then add `http://retriever-bandcamp:8080` under Settings → Plugins in Melodex (it's one of the templates under Add),
 and paste the cookie into its settings.
 
-`BANDCAMP_URL` points the plugin somewhere other than bandcamp.com; the Melodex sandbox uses it for a stand-in.
+`BANDCAMP_URL` points the plugin somewhere other than bandcamp.com; Melodex's sandbox uses it for a stand-in.
 
 ## Tests
 
